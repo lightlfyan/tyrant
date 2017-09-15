@@ -1,0 +1,214 @@
+<html>
+
+<head>
+    <title>tyrant</title>
+    <link href="/static/style/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style/dashboard.css" rel="stylesheet">
+    <link href="/static/style/docs.min.css" rel="stylesheet">
+    <script src="/static/style/jquery-3.1.1.min.js"></script>
+    <script src="/static/style/jquery-ui.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $("#createform").submit(function(event) {
+            event.preventDefault();
+            var posting = $.post("/create", $(this).serialize());
+            posting.done(function(data) {
+                alert(data);
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tyrant <!-- SUBTITLE --></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>{{.}}</li>
+                <li><a href="/">Create</a></li>
+                <li><a href="/show">Reports</a></li>
+                <li><a href="/static/statsTMPL.html">Status</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/taskqueue">TaskQueue</a></li>
+                <li><a href="/static/help.html">帮助</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row placeholders">
+</div>
+
+
+<div class="container">
+    <form action="/create" method="post" id="createform">
+        <table class="table table-bordered table-striped table-hover table-sm">
+            <tr>
+                <td>
+                    <label>url：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="url" name="url"/>
+                </td>
+            </tr>
+            <!--<tr>-->
+                <!--<td>-->
+                    <!--<label>urls：</label>-->
+                <!--</td>-->
+                <!--<td>-->
+                    <!--<textarea class="form-control" name="urls" id="urls" style="height:300px;"></textarea>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <td >
+                    <label>num：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="num" name="num" value="10000" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>conc：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="conc" name="conc" value="100" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>qps：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="qps" name="qps" value="0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>gzip：</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="gzip" name="gzip" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>body：</label>
+                </td>
+                <td>
+                        <textarea class="form-control" name="body" id="body" style="height:300px;"
+                                  placeholder='{"a":1, "b":2}'></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>user：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="user" name="user" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>pwd：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="pwd" name="pwd" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>method：</label>
+                </td>
+                <td>
+                    <select name="method" id="method">
+                        <option value="GET"> GET </option>
+                        <option value="POST"> POST </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>timeout：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="timeout" name="timeout" value="5" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>accept：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="accept" name="accept" value="" placeholder="application/json" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>contentType：</label>
+                </td>
+                <!--<td><input class="form-control" type="text" id="contentType" name="contentType" value="text/html"/></td>!-->
+                <td>
+                    <select name="contentType" id="contentType">
+                        <option value="">empty</option>
+                        <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                        <option value="application/json">application/json</option>
+                        <option value="multipart/form-data">multipart/form-data</option>
+                        <option value="application/xml">application/xml</option>
+                        <option value="text/plain">text/plain</option>
+                        <option value="text/html">text/html</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>keepAlive：</label>
+                </td>
+                <td>
+                    <select name="keepalive" id="keepalive">
+                        <option value="true"> true </option>
+                        <option value="false"> false </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>host：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="host" name="host" value="" placeholder="www.example.com" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>cookie：</label>
+                </td>
+                <td>
+                    <input class="form-control" type="text" id="cookie" name="cookie" value=""
+                           placeholder='username=abc; password=123' />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>headers：</label>
+                </td>
+                <td>
+                    <textarea class="form-control" name="headers" id="headers" style="height:300px;" placeholder='Accept-Encoding=gzip&Content-Type=text/plain'></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2 align="middle">
+                    <input class="btn btn-lg btn-default-outline" type="reset" value="重置" />
+                    <input class="btn btn-lg btn-success-outline" type="submit" value="提交" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+
+</html>

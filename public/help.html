@@ -1,0 +1,114 @@
+<html>
+<head>
+    <title>tyrant</title>
+    <link href="/static/style/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style/dashboard.css" rel="stylesheet">
+    <link href="/static/style/docs.min.css" rel="stylesheet">
+    <link href="/static/style/jquery-ui.css" rel="stylesheet">
+    <link href="/static/style/login.css" rel="stylesheet">
+
+    <script src="/static/style/jquery-3.1.1.min.js"></script>
+    <script src="/static/style/jquery-ui.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel="stylesheet" href="/static/style/github.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tyrant <!-- SUBTITLE --></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Create</a></li>
+                <li><a href="/show">Reports</a></li>
+                <li><a href="/static/statsTMPL.html">Status</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/taskqueue">TaskQueue</a></li>
+                <li><a href="/static/help.html">帮助</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row placeholders">
+</div>
+
+
+<div class="container">
+
+
+<h1 id="-">使用说明</h1>
+<h2 id="-create">任务创建页面 Create</h2>
+<blockquote>
+    <p>url</p>
+</blockquote>
+<ol>
+    <li>被压测的url, 例如 <em><a href="https://www.example.com">https://www.example.com</a></em></li>
+    <li>url可以使用逗号分割, 这样压测工具会随机选取url来进行访问, 例如: <a href="http://www.example.com;https://10.102.10.22/api">http://www.example.com;https://10.102.10.22/api</a></li>
+    <li><p>url支持可变参数, 需要在upload页面上传文件, 各式参考下面:</p>
+        <pre class="editor-colors lang-csv"><div class="line"><span class="text plain null-grammar"><span>abcd,1234,5678</span></span></div><div class="line"><span class="text plain null-grammar"><span>sowl,2123,1425</span></span></div><div class="line"><span class="text plain null-grammar"><span>&nbsp;</span></span></div><div class="line"><span class="text plain null-grammar"><span>每条数据使用逗号分隔,分别对应标记&nbsp;{{.P1}}&nbsp;{{.P2}}&nbsp;{{.P3}}</span></span></div><div class="line"><span class="text plain null-grammar"><span>&nbsp;</span></span></div><div class="line"><span class="text plain null-grammar"><span>例如</span></span></div><div class="line"><span class="text plain null-grammar"><span class="markup underline link http hyperlink"><span>http://127.0.0.1?openid=</span></span><span>{{.P1}}&amp;username={{.P2}}&amp;passwd={{.P3}}</span></span></div></pre>
+    </li>
+</ol>
+<blockquote>
+    <p>num</p>
+</blockquote>
+<p>请求的总数量, 如果有1000个请求, 压测工具把请求平均分配给压测机</p>
+<blockquote>
+    <p>conc</p>
+</blockquote>
+<p>并发数量</p>
+<blockquote>
+    <p>qps</p>
+</blockquote>
+<p>暂不启用</p>
+<blockquote>
+    <p>gzip</p>
+</blockquote>
+<p>勾选,则开启gzip请求,服务器返回数据会进行gzip压缩</p>
+<blockquote>
+    <p>method</p>
+</blockquote>
+<p>get post</p>
+<blockquote>
+    <p>timeout</p>
+</blockquote>
+<p>超时时间</p>
+<blockquote>
+    <p>accept</p>
+</blockquote>
+<p>http 请求接受的格式 Accept-Content</p>
+<blockquote>
+    <p>contenttype</p>
+</blockquote>
+<p>http body的格式 Content-Type</p>
+<blockquote>
+    <p>keepAlive</p>
+</blockquote>
+<p>勾选,则http请求复用tcp连接, qps会变高,但不符合真实场景</p>
+<blockquote>
+    <p>host</p>
+</blockquote>
+<p>http 请求的域名, 可以url里填写ip, 然后host填写域名</p>
+<blockquote>
+    <p>cookie</p>
+</blockquote>
+<p>http cookie</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>例如:</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>username=abc;&nbsp;passwd=123;</span></span></span></div></pre><blockquote>
+    <p>headers</p>
+</blockquote>
+<p>http请求头</p>
+<pre class="editor-colors lang-bash"><div class="line"><span class="source shell"><span>例如:</span></span></div><div class="line"><span class="source shell"><span>Accept-Encoding=gzip</span><span class="keyword operator list shell"><span>&amp;</span></span><span>Content-Type=text/plain</span></span></div></pre>
+
+</div>
+</body>
+</html>
+
+
+
+

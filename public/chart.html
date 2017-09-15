@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link href="/static/style/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style/dashboard.css" rel="stylesheet">
+    <link href="/static/style/docs.min.css" rel="stylesheet">
+    <link href="/static/style/jquery-ui.css" rel="stylesheet">
+
+    <script src="/static/style/jquery-3.1.1.min.js"></script>
+    <script src="/static/style/highcharts.js"></script>
+    <script src="/static/style/exporting.js"></script>
+    <script src="/static/style/jquery-ui.js"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+    //fill([1,2,3,2,1], [10, 20, 30, 35, 25], "")
+
+    function fill(xs, ys, title) {
+    Highcharts.chart('container', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Qps with concurrency: ' + title
+        },
+        subtitle: {
+            text: 'tyrant'
+        },
+        xAxis: {
+            categories: xs,
+        },
+        yAxis: {
+            title: {
+                text: 'ms'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+        series: [{
+            name: 'tyrant',
+            marker: {
+                symbol: 'square'
+            },
+            data: ys
+        }]
+    });
+    }
+
+    $(function () {
+        eval({{ . }})
+    });
+    </script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tyrant <!-- SUBTITLE --></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Create</a></li>
+                <li><a href="/show">Reports</a></li>
+                <li><a href="/static/statsTMPL.html">Status</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/taskqueue">TaskQueue</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row placeholders"></div>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+syntax = "proto2";
+package protocol;
+
+message Msg {
+    required string cmd = 1;
+}
+
+//--------SYSTEM------------------------------------
+// 10000
+message System_Msg_S2C {         
+    required int32 code = 1;
+}
+
+// 10001	
+message System_Heart_C2S {                   
+}
+
+// 10002
+message System_Heart_S2C {     
+	required int64 server_time = 1;
+}
+
+// 10003
+message System_Message_S2C {
+    required Msg msg = 1;
+}
+
+// 10004
+message System_Ping {
+
+}
+
+// 10005
+message System_Pong {
+
+}
+
+
+//--------Cell--------------------------------------
+// 10100
+message Cell_Login_C2S {
+    required int32 id = 1;
+}
+
+// 10101
+message Cell_Login_S2C {
+    required int32 id = 1;
+    required bool result = 2;
+}
+
+// 1010
+message Cell_Logout_C2S {
+}
+
+// 10103
+message Cell_Fake_S2C {
+    required string filename = 1;
+}
+
+// 10104
+message Cell_Fake_C2S {
+
+}
+
+message Cell_Stop_S2C {
+
+}
+
+message Cell_Stop_C2S {
+
+}
+
+//---------Task--------------------------------------
+// 10200
+
+message KV {
+    required string k = 1;
+    required string v = 2;
+}
+
+message Task_Create_S2C {
+    required int64 task_id = 1;
+    required string url = 2;
+    required int32 num = 3;
+    required int32 conc = 4;
+    required int32 qps = 5;
+    required int32 timeout = 6;
+    required string UserName = 7;
+    required string Password = 8;
+    required string Body = 9;
+    required string Accept = 10;
+    required string contentType = 11;
+    required string Method = 12;
+    required string ProxyAddr = 13;
+    required bool KeepAlive= 14;
+    repeated KV Headers = 15;
+    required string Host = 16;
+    repeated string urls = 17;
+
+    required string uid =  18;
+}
+
+message Task_Create_C2S {
+    required int64 task_id = 1;
+}
+
+message Task_Progress_S2C {
+}
+
+message Task_Progress_C2S {
+    required int64 task_id = 1;
+    required int32 progress = 2;
+}
+
+message Task_Report_C2S {
+	required double totalsecond = 1;
+	required double fastest = 2;
+	required double slowest = 3;
+	required double average = 4;
+	required double rps = 5;
+	required int64 sizetotal = 6;
+	required int64 sizereq = 7;
+    required int64 taskid = 8;
+
+    required int64 code2 = 9;
+    required int64 code3 = 10;
+    required int64 code4 = 11;
+    required int64 code5 = 12;
+    required int64 codeOther = 13;
+
+    required double p10 = 14;
+    required double p25 = 15;
+    required double p50 = 16;
+    required double p75 = 17;
+    required double p90 = 18;
+    required double p95 = 19;
+    required double p99 = 20;
+    required int64 conc = 21;
+    required int64 error = 22;
+
+    required int32 cellid = 23;
+}

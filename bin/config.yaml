@@ -1,0 +1,69 @@
+config:
+  - url: ^/auth/$
+    method: POST
+    ContentType: 'application/json;charset=UTF-8'
+    Code: 201
+    resp: '{
+             "username": "caozijie",
+             "name": "曹子杰",
+             "nick_name": "caozj",
+             "avatar": "http://123.con/234.jpg",
+             "account_id": "2c90a5924954f846014954f8926f0002",
+             "org_id": "8a80809c5bf03b4a015bf0f19342000d",
+             "id": "LKnguYMQ53szcU9znkLwic9ifff5a19d16d24eaf",
+             "permissions": [
+               {
+                 "id": "4cdc74c802bf43a4ba6306177261b2ba",
+                 "pid": "8900a8c3b5b84e89aa96d4c35a07c4ea",
+                 "portal_id": "PORTAL_SALES",
+                 "code": "MENU_PERM",
+                 "name": "权限新增",
+                 "type": "MENU",
+                 "url": "/**",
+                 "service": "/path/to/micro-service/operation",
+                 "level": "12",
+                 "sort": 10,
+                 "stage": "0"
+               }
+             ],
+             "portal_id": "PORTAL_MGT"
+           }'
+
+  - url: ^/auth/\w+$
+    method: GET
+    contentType: 'application/json;charset=UTF-8'
+    Code: 200
+    resp: '{
+             "username": "caozijie",
+             "name": "曹子杰",
+             "nick_name": "caozj",
+             "avatar": "http://123.con/234.jpg",
+             "account_id": "2c90a5924954f846014954f8926f0002",
+             "org_id": "8a80809c5bf03b4a015bf0f19342000d",
+             "v10n": {
+               "id": "666",
+               "code": "123456",
+               "account_id": "666",
+               "account_name": "test@yupiao.com",
+               "target": "sms",
+               "mobile": "13000008888",
+               "cur_pwd": "654321"
+             },
+             "id": "LKnguYMQ53szcU9znkLwic9ifff5a19d16d24eaf",
+             "permissions": [
+               {
+                 "id": "4cdc74c802bf43a4ba6306177261b2ba",
+                 "pid": "8900a8c3b5b84e89aa96d4c35a07c4ea",
+                 "portal_id": "PORTAL_SALES",
+                 "code": "MENU_PERM",
+                 "name": "权限新增",
+                 "type": "MENU",
+                 "url": "/**",
+                 "service": "/path/to/micro-service/operation",
+                 "level": "12",
+                 "sort": 10,
+                 "stage": "0"
+               }
+             ],
+             "portal_id": "PORTAL_MGT"
+           }'

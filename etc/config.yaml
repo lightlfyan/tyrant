@@ -1,0 +1,12 @@
+a: easy
+
+get:
+  - url: test
+    resp: respon str
+
+
+channels:
+  - name: '#mychannel'
+    password: ''
+  - name: '#myprivatechannel'
+    password: 'mypassword'

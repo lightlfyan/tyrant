@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <title>tyrant</title>
+    <link href="/static/style/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style/dashboard.css" rel="stylesheet">
+    <link href="/static/style/docs.min.css" rel="stylesheet">
+    <link href="/static/style/jquery-ui.css" rel="stylesheet">
+    <script src="/static/style/jquery-3.1.1.min.js"></script>
+    <script src="/static/style/jquery-ui.js"></script>
+
+    <script>
+
+    String.prototype.format = function() {
+    var formatted = this;
+    for (var i = 0; i < arguments.length; i++) {
+        var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+        formatted = formatted.replace(regexp, arguments[i]);
+    }
+    return formatted;
+    };
+
+    var _data;
+    function getstatus() {
+        var posting = $.get("/stats");
+        posting.done(function(data) {
+
+            var _url = data["url"];
+            var _data = data["clients"];
+
+            html = `<h3>当前任务:<h3> <p><span class="label label-success">{0}</span></p> `.format(_url);
+            html += `<div class="row placeholders"></div>`
+
+            for (i = 0; i < _data.length; i++) {
+                info = _data[i]
+                if(info != null){
+                     for(var k in info){
+                        var sub_val = info[k];
+                        console.log(sub_val);
+                        html += `<div><h5>client: <span class="label label-danger">{0}</span>  ip: <span class="label label-danger">{1}</span> </h5></div>`.format(i, k);
+
+                        var p = parseInt(sub_val)
+                        if (p < 100){
+                            html += `<div class="progress progress-striped active">`;
+                        } else {
+                            html += `<div class="progress">`;
+                        }
+
+                        html += `
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{0}%">
+                        {1}%
+                        </div></div>`.format(sub_val, sub_val);
+
+                        continue;
+                     }
+                } else {
+                    html += '<div><h5>client:<span class="label label-danger">{0}</span>  ip: <span class="label label-danger">null</span> </h5></div>'.format(i);
+                    html += `
+                    <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    0%
+                    </div></div>
+                    `
+                }
+            }
+            $("#result").html(html);
+
+        });
+    }
+    $(document).ready(function() {
+        getstatus();
+        window.setInterval(getstatus, 1000);
+    });
+
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tyrant <!-- SUBTITLE --></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Create</a></li>
+                <li><a href="/show">Reports</a></li>
+                <li><a href="/static/statsTMPL.html">Status</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/taskqueue">TaskQueue</a></li>
+                <li><a href="/static/help.html">帮助</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row placeholders">
+</div>
+
+<div id="result" class="container">
+</div>
+
+</body>
+</html>

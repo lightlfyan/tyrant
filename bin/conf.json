@@ -1,0 +1,29 @@
+{
+    "/api/url1": {
+        "MaxConnect": 0,
+        "ResponseStr": "timestamp",
+	    "TimeWaitMs": 0,
+        "TimeOutMs": 0,
+	    "ContentType": "text/html",
+        "ApiType": 0,
+        "Code": 200
+    },
+
+    "/api/cpu": {
+        "MaxConnect": 0,
+        "ResponseStr": "timestamp",
+        "TimeWaitMs": 0,
+        "TimeOutMs": 0,
+        "ContentType": "text/plain",
+        "ApiType": 1
+    },
+
+    "/api/io": {
+        "MaxConnect": 1000,
+        "ResponseStr": "",
+	    "TimeWaitMs": 0,
+        "TimeOutMs": 0,
+        "ContentType": "text/plain",
+        "ApiType": 2
+    }
+}
